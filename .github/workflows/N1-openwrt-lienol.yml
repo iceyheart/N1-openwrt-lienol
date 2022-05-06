@@ -141,8 +141,7 @@ jobs:
             打包日期：${{ env.PACKAGED_OUTPUTDATE }}
             内核版本：5.15.36
             默认IP：192.168.32.2 默认用户名密码： root/password
-        artifacts: "${{ env.FIRMWARE }}/*,${{ env.PACKAGED_OUTPUTPATH }}/*"
-
+        
     - name: Remove old Releases
       uses: dev-drprasad/delete-older-releases@v0.1.0
       with:
