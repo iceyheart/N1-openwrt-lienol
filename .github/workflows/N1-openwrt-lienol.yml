@@ -1,4 +1,4 @@
-name: N1 OpenWrt
+name: N1-openwrt-lienol
 
 
 on:
@@ -11,8 +11,8 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: master
+  REPO_URL: https://github.com/lienol/openwrt
+  REPO_BRANCH: 22.03
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
   SCRIPT_SH: script.sh
