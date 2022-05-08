@@ -116,7 +116,7 @@ jobs:
         tag: N1-Openwrt_${{ env.DATE }}
         allowUpdates: true
         artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
-        token: ${{ secrets.RELEASE_TOKEN }}
+        token: ${{ secrets.RELEASES_TOKEN }}
         body: |
           使用lienol源码制作 https://github.com/lienol/openwrt
           编译使用版本:
@@ -133,5 +133,5 @@ jobs:
         keep_latest: 3
         delete_tags: true
       env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
 
