@@ -12,7 +12,7 @@ on:
 
 env:
   REPO_URL: https://github.com/lienol/openwrt
-  REPO_BRANCH: 22.03
+  REPO_BRANCH: 21.02
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
   SCRIPT_SH: script.sh
