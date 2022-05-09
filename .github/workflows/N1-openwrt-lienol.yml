@@ -113,7 +113,7 @@ jobs:
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-        tag: N1-Openwrt_${{ env.DATE }}
+        tag: N1-Openwrt_${{ env.PACKAGED_OUTPUTDATE }}
         allowUpdates: true
         artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
         token: ${{ secrets.RELEASES_TOKEN }}
