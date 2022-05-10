@@ -20,6 +20,7 @@ env:
   SRC_SH: src.sh
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
+  KERNEL_VERSION: 5.15.38
 
 jobs:
   build_openwrt:
@@ -67,11 +68,9 @@ jobs:
                       
     - name: Update feeds
       run: |
-        cd openwrt
-        echo 'src-git SSRplus https://github.com/fw876/helloworld.git' >>feeds.conf.default
-        echo 'src-git passwall https://github.com/iceyheart/openwrt-passwall5.5' >>feeds.conf.default
-        echo 'src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git' >>feeds.conf.default
-        ./scripts/feeds update -a
+        chmod +x $SRC_SH
+        ./$SRC_SH
+        cd openwrt && ./scripts/feeds update -a
 
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
@@ -108,12 +107,12 @@ jobs:
       env:
         OPENWRT_ARMVIRT: openwrt/bin/targets/*/*/*.tar.gz
         PACKAGE_SOC: s905d
-        KERNEL_VERSION_NAME: 5.15.36
+        KERNEL_VERSION_NAME: ${{ env.KERNEL_VERSION }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-        tag: N1-Openwrt_${{ env.PACKAGED_OUTPUTDATE }}
+        tag: N1-Openwrt_s905D_${{ env.KERNEL_VERSION }}_${{ env.PACKAGED_OUTPUTDATE }}
         allowUpdates: true
         artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
         token: ${{ secrets.RELEASES_TOKEN }}
@@ -124,7 +123,7 @@ jobs:
           
           刷机固件简介：
             打包日期：${{ env.PACKAGED_OUTPUTDATE }}
-            内核版本：5.15.36
+            内核版本：${{ env.KERNEL_VERSION }}
             默认IP：192.168.32.2 默认用户名密码： root/password
         
     - name: Remove old Releases
